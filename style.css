@@ -1,7 +1,6 @@
-body,
-ul,
-li,
-p {
+
+/* RETIRA AS MARGINS E PADDINGS PADRÕES DOS NAVEGADORES */
+body, ul, li, p {
   margin: 0px;
   padding: 0px;
   list-style: none;
@@ -53,6 +52,8 @@ img {
 
 /* CSS FLEXBOX 1 */
 
+/* O FLEX-WRAP É A PROPRIEDADE QUE DIZ QUE QUANDO NÃO TIVER MAIS ESPAÇO NA LINHA ATUAL, QUE PODE QUEBRAR */
+/* UM EXEMPLO É MOBILE */
 .flex {
   display: flex;
   flex-wrap: wrap;
@@ -60,6 +61,7 @@ img {
   margin: 0 auto;
 }
 
+/* SELETOR, ESTÁ PEGANDO TODAS AS DIV DENTRO DA TAG QUE TEM A CLASSE FLEX */
 .flex > div {
   flex: 1 1 200px;
   margin: 10px;
@@ -67,6 +69,11 @@ img {
 
 /* CSS GRID 1 */
 
+/* O DISPLAY GRID FALA QUE SERÁ EM FORMATO DE GRID LAYOUT */
+/* grid-template-columns diz quantas colunas essa grid terá */
+/* e a função repeat recebe como parâmetros: 1 parametro é a quantidade de repetição e o 2 parâmetro é o que vai repetir */
+/* 1fr é um método flexível para as grid e torna-las dinamicas */
+/* mais sobre grid layout em: https://developer.mozilla.org/pt-BR/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout */
 .grid1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -76,6 +83,9 @@ img {
   grid-gap: 20px;
 }
 
+/* A função NTH-CHILD é uma função que seleciona somente alguns filhos ou determinado index */
+/* Exemplo: .grid1 > div:nth-child(3) --> a terceira filha da DIV que está dentro da TAG COM A CLASSE GRID1 */
+/* Exemplo: .grid1 > div:nth-child(2n) --> todas as filhas de DIV com index par */
 .grid1 > div:nth-child(n + 4) {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -83,6 +93,8 @@ img {
   align-items: center;
 }
 
+/* o grid-column diz em qual coluna ele irá ocupar, no caso abaixo, ele ocupará sempre a primeira coluna do Grid Layout */
+/* o grid-ROW diz em qual LINHA ele irá ocupar, no caso abaixo ( 2 / 5 ) diz que ele ocupará da segunda linha até a quinta linha */
 .grid1 > div.anuncio {
   grid-column: 1;
   grid-row: 2 / 5;
@@ -90,18 +102,29 @@ img {
   display: block;
 }
 
+/* O @media é como se fosse uma condição no CSS, ai quando a condição for verdadeira, tudo que estiver dentro da @media, irá mudar */
+/* no caso abaixo, é quando a width da tela for menor que 600px */
+/* então quando for menor que 600px, as classes:
+ .grid1, 
+ as filhas com index 4+ da DIV dentro de grid1
+ anuncio que se encontra dentro da div dentro da grid1 serão alteradas */
 @media (max-width: 600px) {
+
   .grid1 {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .grid1 > div:nth-child(n + 4) {
     display: block;
   }
+
+  /* O ORDER -1, coloca esse cara para aparecer sempre como primeiro (somente o Design, mas na DOM, ele ficará na posição padrão dele) */
   .grid1 > div.anuncio {
     grid-column: auto;
     grid-row: auto;
     order: -1;
   }
+
 }
 
 /* CSS Grid 2 */
@@ -120,17 +143,21 @@ img {
 }
 
 @media (max-width: 600px) {
+  
   .grid2 {
     grid-template-columns: 1fr;
   }
+
   .sidebar {
     display: flex;
     overflow: scroll;
   }
+
   .sidebar > div {
     flex: 1 0 200px;
     margin: 0 10px;
   }
+
 }
 
 /* SECTION GRID 3 */
